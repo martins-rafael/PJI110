@@ -1,0 +1,21 @@
+body {
+  background: #f8f9fa;
+}
+
+.container {
+  max-width: 1080px;
+}
+
+.btn {
+  min-width: 10rem;
+  text-transform: uppercase;
+}
+
+.custom-card {
+  padding: 1.5rem 1rem;
+  width: 480px;
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08);
+}
