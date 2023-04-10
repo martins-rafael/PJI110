@@ -27,7 +27,7 @@ Tecnologias utilizadas no desenvolvimento do projeto:
 ## Estrutura da aplicação
 
 ```
-SJBV-PI1
+PJI110
     ├── app
     │   ├── static
     │   │   └── style.css
@@ -74,7 +74,7 @@ Dê um fork neste repositório e em seguida clone o mesmo para sua máquina
 
 1 - Entre na pasta web com
 ```
-cd SJBV-PI1
+cd PJI110
 ```
 
 2 - Crie um ambiente virtual com o comando
