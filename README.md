@@ -104,6 +104,8 @@ flask run --debug
 
 7 - Acesse http://localhost:5000 no seu navegador.
 
+8 - Realize as alterações e crie um pull request.
+
 <br>
 
 
