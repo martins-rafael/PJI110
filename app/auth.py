@@ -34,6 +34,9 @@ def login():
 
         flash(error)
 
+    if g.member:
+        return redirect(url_for('index'))
+
     return render_template('auth/login.html')
 
 
