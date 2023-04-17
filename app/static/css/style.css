@@ -8,14 +8,29 @@ body {
 
 .btn {
   min-width: 10rem;
-  text-transform: uppercase;
 }
 
-.custom-card {
+.custom-card,
+.custom-card--large,
+.custom-card--small {
   padding: 1.5rem 1rem;
   width: 480px;
   max-width: 100%;
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.custom-card--small {
+  width: 258px;
+}
+
+.custom-card--large {
+  width: 524px;
+}
+
+.custom-card--link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
