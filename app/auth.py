@@ -48,7 +48,7 @@ def load_logged_in_member():
         g.member = None
     else:
         g.member = get_db().execute(
-            'SELECT * FROM member WHERE id = ?', (member_id,)
+            'SELECT id, name, is_admin FROM member WHERE id = ?', (member_id,)
         ).fetchone()
 
 
