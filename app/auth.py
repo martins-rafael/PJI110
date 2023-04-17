@@ -67,3 +67,14 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+
+def only_admin(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if not g.member['is_admin']:
+            return redirect(url_for('main.index'))
+
+        return view(**kwargs)
+
+    return wrapped_view
