@@ -1,13 +1,99 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container container-fluid d-flex align-items-center justify-content-between mt-5">
+<div class="container container-fluid d-flex flex-column justify-content-between mt-5">
   <h1>
     {% block title %}
     Membro
     {% endblock %}
   </h1>
 
-  <!-- continuar daqui -->
+  <table class="table mt-4">
+    <tbody>
+      <tr>
+        <td>
+          <span class="fw-bold">Nome</span>
+          <br>
+          {{ member['name'] }}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="fw-bold">Email</span>
+          <br>
+          {{ member['email'] }}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="fw-bold">RG</span>
+          <br>
+          {% if member['rg'] %}
+          {{ member['rg'] }}
+          {% else %}
+          Não Cadastrado
+          {% endif %}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="fw-bold">CPF</span>
+          <br>
+          {% if member['cpf'] %}
+          {{ member['cpf'] }}
+          {% else %}
+          Não Cadastrado
+          {% endif %}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="fw-bold">Data de nascimento</span>
+          <br>
+          {% if member['birth'] %}
+          {{ member['birth'].strftime("%d/%m/%Y") }}
+          {% else %}
+          Não Cadastrado
+          {% endif %}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="fw-bold">Tem permissão de administrador? </span>
+          <br>
+          {% if member['is_admin'] %} Sim {% else %} Não {% endif %}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="fw-bold">Endereço</span>
+          <br>
+          {% if member['address'] %}
+          {{ member['address'] }}
+          {% else %}
+          Não Cadastrado
+          {% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-end mt-4">
+    <a class="btn btn-primary fw-bold me-3" href="{{ url_for('main.edit', id=member['id']) }}">Editar</a>
+
+    <a class="btn btn-warning fw-bold me-3" href="{{ url_for('main.password', id=member['id']) }}">Alterar Senha</a>
+
+    {% if g.member['is_admin'] %}
+    <form class="form-delete" method="post" action="{{ url_for('main.delete', id=member['id']) }}">
+      <button class="btn btn-danger fw-bold" type="submit">Excluir</button>
+    </form>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}

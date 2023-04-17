@@ -6,6 +6,84 @@ Dashboard
 
 {% block content %}
 <h1 class="display-6 text-center" style="margin-top: 5rem;">
-  Bem-vindo <span class="fw-bold">{{ member['name'] }}</span>
+  Bem-vindo <span class="fw-bold">{{ g.member['name'][:23] + '...' if g.member['name']|length > 23 else g.member['name'] }}</span>
 </h1>
+
+
+<div class="container container-fluid mt-5">
+  <h2 class="fw-bold">Dashboard</h2>
+
+  <div class="d-flex align-items-center mt-3 {{ 'justify-content-between' if g.member['is_admin'] }}">
+    {% if g.member['is_admin'] %}
+    <div class="custom-card--small">
+      <div class="fw-bold text-body-tertiary">TOTAL DE MEMBROS</div>
+
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="display-6 fw-bold">{{ data[0][0] }}</span>
+        <img src="{{ url_for('static', filename='icons/users.svg') }}" alt="ícone de usuário">
+      </div>
+    </div>
+
+    <div class="custom-card--small">
+      <div class="fw-bold text-body-tertiary">ANIVERSÁRIOS DO MÊS</div>
+
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="display-6 fw-bold">04</span>
+        <img src="{{ url_for('static', filename='icons/gift.svg') }}" alt="ícone de presente">
+      </div>
+    </div>
+
+    <a class="custom-card--small custom-card--link" href="{{ url_for('main.create') }}">
+      <div class="d-flex flex-column align-items-center justify-content-between">
+        <img src="{{ url_for('static', filename='icons/plus-circle.svg') }}" alt="ícone de adicionar">
+        <div class="fw-bold">ADICIONAR NOVO MEMBRO</div>
+      </div>
+    </a>
+
+    <a class="custom-card--small custom-card--link" href="{{ url_for('main.members') }}">
+      <div class="d-flex flex-column align-items-center justify-content-between">
+        <img src="{{ url_for('static', filename='icons/folder.svg') }}" alt="ícone de adicionar">
+        <div class="fw-bold">VER TODOS OS MEMBROS</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mt-3">
+    <div class="custom-card--small" style="padding: 0.7rem;">
+      <div class="d-flex flex-column align-items-center justify-content-between">
+        <div class="fw-bold text-body-tertiary">ÚLTIMOS CADASTROS</div>
+
+        <div>
+          {% for member in data[1] %}
+          <p class="mb-0">{{ member['name'][:23] + '...' if member['name']|length > 23 else member['name'] }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <a class="custom-card--small custom-card--link {{ 'me-3' if not g.member['is_admin'] }}"
+      href="{{ url_for('main.member', id=g.member['id']) }}">
+      <div class="d-flex flex-column align-items-center justify-content-between">
+        <img src="{{ url_for('static', filename='icons/eye-big.svg') }}" alt="ícone de um olho">
+        <div class="fw-bold">VER MEUS DADOS</div>
+      </div>
+    </a>
+
+    <a class="custom-card--small custom-card--link {{ 'me-3' if not g.member['is_admin'] }}"
+      href="{{ url_for('main.edit', id=g.member['id']) }}">
+      <div class="d-flex flex-column align-items-center justify-content-between">
+        <img src="{{ url_for('static', filename='icons/pencil-square.svg') }}" alt="ícone de lápis">
+        <div class="fw-bold">EDITAR MEUS DADOS</div>
+      </div>
+    </a>
+
+    <a class="custom-card--small custom-card--link" href="{{ url_for('main.password', id=g.member['id']) }}">
+      <div class="d-flex flex-column align-items-center justify-content-between">
+        <img src="{{ url_for('static', filename='icons/key.svg') }}" alt="ícone de chave">
+        <div class="fw-bold">ALTERAR MINHA SENHA</div>
+      </div>
+    </a>
+  </div>
+</div>
 {% endblock %}

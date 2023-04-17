@@ -1,13 +1,73 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container container-fluid d-flex align-items-center justify-content-between mt-5">
+<div class="container container-fluid d-flex flex-column justify-content-between mt-5">
   <h1>
     {% block title %}
     Novo Membro
     {% endblock %}
   </h1>
 
-  <!-- continuar daqui -->
+  <form class="row g-2 mt-4 form-validate" method="post">
+    <div class="form-group col-md-6">
+      <label for="name" class="form-label fw-bold">Nome</label>
+      <input type="text" class="form-control" name="name" id="name" placeholder="Insira o nome" required
+        value="{{ request.form['name'] }}">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="email" class="form-label fw-bold">Email</label>
+      <input type="email" class="form-control" name="email" id="email" placeholder="Insira o email" required
+        value="{{ request.form['email'] }}" onblur="Validate.apply(this, 'isEmail')">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="password" class="form-label fw-bold">Senha</label>
+      <input type="password" class="form-control" name="password" id="password" placeholder="******" required
+        onblur="Validate.apply(this, 'passwordLength')">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="password_repeat" class="form-label fw-bold">Confirmar senha</label>
+      <input type="password" class="form-control" name="password_repeat" id="password_repeat" placeholder="******"
+        required onblur="Validate.apply(this, 'passwordLength')">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="rg" class="form-label"><span class="fw-bold">RG</span> (apenas números)</label>
+      <input type="text" class="form-control" name="rg" id="rg" placeholder="Insira o rg"
+        value="{{ request.form['rg'] }}" onkeydown="Mask.apply(this, 'rg')" onblur="Validate.apply(this, 'isRg')">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="cpf" class="form-label"><span class="fw-bold">CPF</span> (apenas números)</label>
+      <input type="text" class="form-control" name="cpf" id="cpf" placeholder="Insira o cpf"
+        value="{{ request.form['cpf'] }}" onkeydown="Mask.apply(this, 'cpf')" onblur="Validate.apply(this, 'isCpf')">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="birth" class="form-label fw-bold">Data de nascimento</label>
+      <input type="date" class="form-control" name="birth" id="birth" value="{{ request.form['birth'] }}">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="admin" class="form-label fw-bold">Tem permissão de administrador?</label>
+      <select class="form-select" name="admin" id="admin">
+        <option value="0" selected>Não</option>
+        <option value="1">Sim</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-12">
+      <label for="address" class="form-label fw-bold">Endereço</label>
+      <input type="text" class="form-control" name="address" id="address" placeholder="Insira o endereço completo"
+        value="{{ request.form['address'] }}">
+    </div>
+
+    <div class="d-flex justify-content-end mt-4">
+      <a class="btn btn-secondary fw-bold me-3" href="{{ url_for('main.members') }}">Cancelar</a>
+      <button class="btn btn-primary fw-bold" type="submit">Cadastrar</button>
+    </div>
+  </form>
 </div>
 {% endblock %}
