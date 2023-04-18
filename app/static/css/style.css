@@ -23,6 +23,7 @@ body {
 
 .custom-card--small {
   width: 258px;
+  min-height: 120px;
 }
 
 .custom-card--large {
