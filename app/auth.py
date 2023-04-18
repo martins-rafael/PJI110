@@ -4,7 +4,7 @@ from flask import (Blueprint, flash, g, redirect, render_template, request,
                    session, url_for)
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from app.db import get_db
+from app.models import Member, db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -14,21 +14,19 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        db = get_db()
+
         error = None
 
-        member = db.execute(
-            "SELECT * FROM member WHERE email = ?", (email,)
-        ).fetchone()
+        member = Member.query.filter_by(email=email).first()
 
         if member is None:
             error = 'Email incorreto.'
-        elif not check_password_hash(member['password'], password):
+        elif not check_password_hash(member.password, password):
             error = 'Senha incorreta.'
 
         if error is None:
             session.clear()
-            session['member_id'] = member['id']
+            session['member_id'] = member.id
 
             return redirect(url_for('index'))
 
@@ -47,9 +45,8 @@ def load_logged_in_member():
     if member_id is None:
         g.member = None
     else:
-        g.member = get_db().execute(
-            'SELECT id, name, is_admin FROM member WHERE id = ?', (member_id,)
-        ).fetchone()
+        g.member = db.session.query(
+            Member.id, Member.name, Member.is_admin).filter_by(id=member_id).first()
 
 
 @bp.route('/logout')
@@ -72,7 +69,7 @@ def login_required(view):
 def only_admin(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if not g.member['is_admin']:
+        if not g.member.is_admin:
             return redirect(url_for('main.index'))
 
         return view(**kwargs)
