@@ -92,19 +92,28 @@ source venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-5 - Inicie o banco de dados de desenvolvimento
+5 - Crie uma tabela com o nome `igrejaconectada`
+
+6 - Defina a variável de ambiente com os dados para conectar o banco de dados
 ```
-flask init-db
+export DATABASE_URL=postgresql://postgres:suasenha@localhost:5432/igrejaconectada
 ```
 
-6 - Rode a aplicação
+7 - Rode as migrations
+```
+flask db init
+flask db migrate
+flask db upgrade
+```
+
+8 - Rode as aplicação
 ```
 flask run --debug
 ```
 
-7 - Acesse http://localhost:5000 no seu navegador.
+9 - Acesse http://localhost:5000 no seu navegador.
 
-8 - Realize as alterações e crie um pull request.
+10 - Realize as alterações e crie um pull request.
 
 <br>
 
