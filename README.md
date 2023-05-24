@@ -18,6 +18,8 @@ Tecnologias utilizadas no desenvolvimento do projeto:
 - [SQLAlchemy](https://www.sqlalchemy.org/)
 - [SQLite](https://sqlite.org/index.html)
 - [PostgreSQL](https://www.postgresql.org/)
+- [Neon](https://neon.tech/)
+- [Vercel](https://vercel.com/dashboard)
 - [Figma](https://www.figma.com/)
 - [Bootstrap](https://getbootstrap.com/)
 - [VS Code](https://code.visualstudio.com/)
@@ -30,34 +32,28 @@ Tecnologias utilizadas no desenvolvimento do projeto:
 PJI110
     ├── app
     │   ├── static
-    │   │   └── style.css
+    │   │   ├── css
+    │   │   ├── icons
+    │   │   └── js
     │   │
     │   ├── templates
+    │   │   ├── announcements
     │   │   ├── auth
-    │   │   │   └── login.html
-    │   │   │
     │   │   ├── main
-    │   │   │   ├── create.html
-    │   │   │   ├── edit.html
-    │   │   │   ├── index.html
-    │   │   │   ├── member.html
-    │   │   │   ├── members.html
-    │   │   │   └── password.html
-    │   │   │
-    │   │   ├── partials
-    │   │   │   └── header.html
-    │   │   │
-    │   │   └── base.html
+    │   │   └── partials
     │   │
     │   ├── __init__.py
+    │   ├── announcements.py
     │   ├── auth.py
     │   ├── db.py
     │   ├── main.py
+    │   ├── models.py
     │   └── schema.sql
     │
     ├── .gitignore
     ├── README.md
-    └── requirements.txt
+    ├── requirements.txt
+    └── vercel.json
 ```
 
 
@@ -121,7 +117,7 @@ flask run --debug
 ## Licença
 
 <a href="https://opensource.org/licenses/MIT">
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-ff375f?style=flat-square">
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-0D6EFD?style=flat-square">
 </a>
 
 <br>
