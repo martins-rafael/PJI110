@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+Comunicado
+{% endblock %}
+
+{% block content %}
+<div class="container container-fluid d-flex flex-column justify-content-between mt-5">
+  <h1>
+    {{announcement['title']}}
+  </h1>
+
+  <table class="table mt-4">
+    <tbody>
+      <tr>
+        <td>
+          <span class="fw-bold">Criado por</span>
+          <br>
+          {{announcement['member_name']}}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="fw-bold">Data da criação</span>
+          <br>
+          {{ announcement['created_at'].strftime("%d/%m/%Y") }}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="fw-bold">Descrição</span>
+          <br>
+          {{ announcement['description'] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-end my-4">
+    {% if g.member['is_admin'] %}
+    <a class="btn btn-primary fw-bold me-3" href="{{ url_for('announcements.edit', id=announcement['id']) }}">Editar</a>
+
+    <form class="form-delete" method="post" action="{{ url_for('announcements.delete', id=announcement['id']) }}">
+      <button class="btn btn-danger fw-bold" type="submit">Excluir</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

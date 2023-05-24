@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container container-fluid d-flex flex-column justify-content-between mt-5">
+  <h1>
+    {% block title %}
+    Atualizar Comunicado
+    {% endblock %}
+  </h1>
+
+  <form class="row g-2 mt-4 form-validate" method="post">
+    <div class="form-group col-md-12">
+      <label for="title" class="form-label fw-bold">Título do Comunicado</label>
+      <input type="text" class="form-control" name="title" id="title" placeholder="Insira o título" required
+        value="{{ request.form['title'] or announcement['title'] }}">
+    </div>
+
+    <div class="form-group col-md-12">
+      <label for="description" class="form-label fw-bold">Descrição</label>
+      <textarea class="form-control" name="description" id="description" placeholder="Insira o título" style="height: 200px"
+        required>{{ request.form['description'] or announcement['description'] }}</textarea>
+    </div>
+
+
+
+    <div class="d-flex justify-content-end my-4">
+      <a class="btn btn-secondary fw-bold me-3" href="{{ url_for('announcements.announcements') }}">Cancelar</a>
+      <button class="btn btn-primary fw-bold" type="submit">Atualizar</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
