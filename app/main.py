@@ -1,7 +1,8 @@
-import datetime
+from datetime import datetime
 
 from flask import (Blueprint, flash, g, redirect, render_template, request,
                    url_for)
+from sqlalchemy import extract
 from werkzeug.exceptions import abort
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -14,14 +15,18 @@ bp = Blueprint('main', __name__)
 @bp.route('/')
 @login_required
 def index():
-    total_members = db.session.query(Member).count()
+    if g.member.is_admin:
+        members = db.session.query(Member)
+        total_members = members.count()
+        last_members_created = members.order_by(Member.id.desc()).limit(3)
+        birthdays = members.filter(extract(
+            'month', Member.birth) == datetime.today().month).count()
 
-    last_members_created = db.session.query(
-        Member).order_by(Member.id.desc()).limit(3)
+        data = [total_members, last_members_created, birthdays]
 
-    data = [total_members, last_members_created]
-
-    return render_template('main/index.html', data=data)
+        return render_template('main/index.html', data=data)
+    else:
+        return render_template('main/index.html')
 
 
 @bp.route('/<int:id>/password', methods=('GET', 'POST'))
@@ -93,7 +98,7 @@ def create():
         password_repeat = request.form['password_repeat']
         rg = request.form['rg']
         cpf = request.form['cpf']
-        birth = datetime.datetime.strptime(
+        birth = datetime.strptime(
             request.form['birth'], '%Y-%m-%d') if request.form['birth'] else None
         is_admin = int(request.form['admin'])
         address = request.form['address']
@@ -101,9 +106,9 @@ def create():
         if not name:
             error = 'O nome é obrigatório.'
         if not email:
-            'O email é obrigatório'
+            error = 'O email é obrigatório'
         if not password:
-            'A senha é obrigatória.'
+            error = 'A senha é obrigatória.'
         if password != password_repeat:
             error = 'Os campos nova senha e confirmar senha precisam ser iguais.'
 
@@ -140,7 +145,7 @@ def edit(id):
         email = request.form['email']
         rg = request.form['rg']
         cpf = request.form['cpf']
-        birth = datetime.datetime.strptime(
+        birth = datetime.strptime(
             request.form['birth'], '%Y-%m-%d') if request.form['birth'] else None
         is_admin = int(request.form['admin'])
         address = request.form['address']
