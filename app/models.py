@@ -31,6 +31,16 @@ class Member(db.Model):
         self.is_admin = is_admin
 
 
+class Announcement(db.Model):
+    __tablename__ = 'announcements'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    description = db.Column(db.String)
+    author_id = db.Column(db.ForeignKey('member.id'))
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+
 def init_defaults():
     if Member.query.first() is None:
         member = Member(name='admin', email='admin@email.com',
