@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from flask_migrate import Migrate
 
-from app.models import Member, init_defaults
+from app.models import init_defaults
 
 
 def create_app(test_config=None):
@@ -28,6 +28,9 @@ def create_app(test_config=None):
     from . import main
     app.register_blueprint(main.bp)
     app.add_url_rule('/', endpoint='index')
+
+    from . import announcements
+    app.register_blueprint(announcements.bp)
 
     @app.before_first_request
     def create_tables():
