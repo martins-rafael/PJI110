@@ -153,7 +153,7 @@ def edit(id):
         if not name:
             error = 'O nome é obrigatório.'
         if not email:
-            'O email é obrigatório'
+            error = 'O email é obrigatório'
 
         if error is not None:
             flash(error)
