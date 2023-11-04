@@ -1,36 +1,44 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container d-flex align-items-center justify-content-between">
+  <div class="container container-fluid">
     <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
       Igreja <br>
       Conectada
     </a>
 
-    {% if g.member['is_admin'] %}
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link {{ 'active fw-bold' if request.path == url_for('index') }}" href="{{ url_for('index') }}">
-          Home
-        </a>
-      </li>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <li class="nav-item">
-        <a class="nav-link {{ 'active fw-bold' if request.path == url_for('main.members') }}"
-          href="{{ url_for('main.members') }}">
-          Membros
-        </a>
-      </li>
+    <div class="collapse navbar-collapse align-items-center justify-content-between" id="navbarSupportedContent">
+      <ul class="navbar-nav w-100 justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link {{ 'active fw-bold' if request.path == url_for('index') }}" href="{{ url_for('index') }}">
+            Home
+          </a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link {{ 'active fw-bold' if request.path == url_for('announcements.announcements') }}"
-          href="{{ url_for('announcements.announcements') }}">
-          Comunicados
-        </a>
-      </li>
-    </ul>
+        {% if g.member['is_admin'] %}
+        <li class="nav-item">
+          <a class="nav-link {{ 'active fw-bold' if request.path == url_for('main.members') }}"
+            href="{{ url_for('main.members') }}">
+            Membros
+          </a>
+        </li>
+        {% endif %}
+
+        <li class="nav-item">
+          <a class="nav-link {{ 'active fw-bold' if request.path == url_for('announcements.announcements') }}"
+            href="{{ url_for('announcements.announcements') }}">
+            Comunicados
+          </a>
+        </li>
+      </ul>
     {% endif %}
 
-    <a class="navbar-text text-decoration-none" href="{{ url_for('auth.logout') }}">
-      Sair
-    </a>
+      <a class="navbar-text text-decoration-none" href="{{ url_for('auth.logout') }}">
+        Sair
+      </a>
+    </div>
   </div>
 </nav>
