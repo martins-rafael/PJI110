@@ -148,3 +148,42 @@ const Validate = {
     };
   }
 }
+
+const HIGH_CONTRAST_KEY = '@IgrejaConectada:altoContraste';
+const LARGE_FONT_SIZE_KEY = '@IgrejaConectada:fonteGrande';
+
+const getHighContrastStatus = () => JSON.parse(localStorage.getItem(HIGH_CONTRAST_KEY));
+const getLargeFontSizeStatus = () => JSON.parse(localStorage.getItem(LARGE_FONT_SIZE_KEY));
+
+const isHighContrastActive = getHighContrastStatus();
+const isLargeFontSizeActive = getLargeFontSizeStatus();
+
+if (isHighContrastActive) {
+  document.body.classList.add('high-contrast');
+} else {
+  document.body.classList.remove('high-contrast');
+}
+
+if (isLargeFontSizeActive) {
+  document.body.classList.add('large-text');
+} else {
+  document.body.classList.remove('large-text');
+}
+
+function toggleStatus(fn, className, key) {
+  const isActive = fn();
+  document.body.classList.toggle(className);
+  localStorage.setItem(key, !isActive);
+}
+
+const accessibilityOptions = document.querySelectorAll('.dropdown-item');
+
+accessibilityOptions.forEach(option => {
+  option.addEventListener('click', event => {
+    if (event.target.innerText === 'Alto contraste') {
+      toggleStatus(getHighContrastStatus, 'high-contrast', HIGH_CONTRAST_KEY);
+    } else {
+      toggleStatus(getLargeFontSizeStatus, 'large-text', LARGE_FONT_SIZE_KEY);
+    }
+  });
+})

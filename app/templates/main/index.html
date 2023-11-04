@@ -6,12 +6,13 @@ Dashboard
 
 {% block content %}
 <h1 class="display-6 text-center" style="margin-top: 5rem;">
-  Bem-vindo <span class="fw-bold">{{ g.member['name'][:23] + '...' if g.member['name']|length > 23 else g.member['name'] }}</span>
+  Bem-vindo <span class="fw-bold high-contrast-accent">{{ g.member['name'][:23] + '...' if g.member['name']|length > 23
+    else g.member['name'] }}</span>
 </h1>
 
 
 <div class="container container-fluid mt-5">
-  <h2 class="fw-bold">Dashboard</h2>
+  <h2 class="fw-bold high-contrast-accent h2">Dashboard</h2>
 
   <div class="row row-cols-1 row-cols-md-4 g-2 mt-3">
     {% if g.member['is_admin'] %}

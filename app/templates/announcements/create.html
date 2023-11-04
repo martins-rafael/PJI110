@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container container-fluid d-flex flex-column justify-content-between mt-5">
-  <h1>
+  <h1 class="h1">
     {% block title %}
     Novo Comunicado
     {% endblock %}
@@ -17,8 +17,8 @@
 
     <div class="form-group col-md-12">
       <label for="description" class="form-label fw-bold">Descrição</label>
-      <textarea class="form-control" name="description" id="description" placeholder="Insira o título" style="height: 200px"
-        required>{{ request.form['description'] }}</textarea>
+      <textarea class="form-control" name="description" id="description" placeholder="Insira a Descrição"
+        style="height: 200px" required>{{ request.form['description'] }}</textarea>
     </div>
 
 

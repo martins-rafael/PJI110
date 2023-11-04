@@ -1,5 +1,63 @@
 body {
   background: #f8f9fa;
+  --card-bg: #ffffff;
+}
+
+body.high-contrast {
+  background: #000000;
+  color: #ffffff;
+  --bs-body-color: #ffffff;
+  --bs-body-bg: #000000;
+  --bs-dark-rgb: #000000;
+  --bs-secondary-color: #ffffff;
+  --bs-tertiary-color: #ffffff;
+  --card-bg: #050505;
+  --accent-color: #0d6efd;
+}
+
+body.high-contrast .navbar-dark {
+  --bs-navbar-color: #ffffff;
+  --bs-navbar-active-color: #0d6efd;
+}
+
+body.high-contrast .form-control::placeholder {
+  color: #ffffff85;
+}
+
+body.large-text {
+  --bs-body-font-size: 1.5rem;
+}
+
+body.large-text .btn {
+  --bs-btn-font-size: 1.5rem;
+}
+
+body.large-text .h1 {
+  font-size: calc(1.875rem + 1.5vw);
+}
+
+body.large-text .h2 {
+  font-size: calc(1.825rem + 0.9vw);
+}
+
+body.large-text .h5 {
+  font-size: 1.75rem;
+}
+
+body.large-text .form-control {
+  font-size: 1.5rem;
+}
+
+body.large-text .display-4 {
+  font-size: calc(1.975rem + 2.7vw);
+}
+
+body.large-text .display-6 {
+  font-size: calc(1.875rem + 1.5vw);
+}
+
+body.large-text .action-icon {
+  width: 1.5rem;
 }
 
 .container {
@@ -14,16 +72,9 @@ body {
 .custom-card--large,
 .custom-card--small {
   padding: 1.5rem 1rem;
-  width: 480px;
-  max-width: 100%;
-  background: #ffffff;
+  background: var(--card-bg);
   border-radius: 8px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08);
-}
-
-.custom-card--small {
-  width: 258px;
-  min-height: 120px;
 }
 
 .custom-card--large {
@@ -36,4 +87,16 @@ body {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+}
+
+.high-contrast-accent {
+  color: var(--accent-color);
+}
+
+.card {
+  --bs-card-bg: var(--card-bg);
+}
+
+.dropdown-menu {
+  --bs-dropdown-link-hover-color: #000000;
 }

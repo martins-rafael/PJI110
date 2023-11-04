@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container container-fluid d-flex flex-column justify-content-between mt-5">
-  <h1>
+  <h1 class="h1 high-contrast-accent">
     {% block title %}
     {% if g.member['id'] == member['id'] %} Atualizar Meus Dados {% else %} Atualizar Membro {% endif %}
     {% endblock %}
@@ -44,7 +44,7 @@
     {% if g.member['is_admin'] %}
     <div class="form-group col-md-6">
       <label for="admin" class="form-label fw-bold">Tem permissão de administrador?</label>
-      <select class="form-select" name="admin" id="admin">
+      <select class="form-select form-control" name="admin" id="admin">
         <option value="0">Não</option>
         <option value="1" {% if member['is_admin'] %} selected {% endif %}>Sim</option>
       </select>

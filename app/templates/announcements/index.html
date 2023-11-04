@@ -2,13 +2,15 @@
 
 {% block content %}
 <div class="container container-fluid d-flex align-items-center justify-content-between mt-5">
-  <h1>
+  <h1 class="h1 high-contrast-accent">
     {% block title %}
     Comunicados
     {% endblock %}
   </h1>
 
+  {% if g.member['is_admin'] %}
   <a class="btn btn-primary fw-bold" href="{{ url_for('announcements.create') }}">Novo</a>
+  {% endif %}
 </div>
 
 <div class="container container-fluid mt-4">
@@ -17,7 +19,7 @@
     <div class="col">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title text-truncate">{{ announcement['title'] }}</h5>
+          <h5 class="card-title text-truncate h5">{{ announcement['title'] }}</h5>
 
           <p class="card-text text-truncate">{{ announcement['description'] }}</p>
 

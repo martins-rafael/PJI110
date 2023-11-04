@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container container-fluid d-flex align-items-center justify-content-between mt-5">
-  <h1>
+  <h1 class="h1 high-contrast-accent">
     {% block title %}
     Membros
     {% endblock %}
@@ -34,16 +34,18 @@
 
       <td class="d-flex justify-content-end">
         <a class="me-2" title="Ver membro" href="{{ url_for('main.member', id=member['id']) }}">
-          <img src="{{ url_for('static', filename='icons/eye.svg') }}" alt="ícone de um olho">
+          <img class="action-icon" src="{{ url_for('static', filename='icons/eye.svg') }}" alt="ícone de um olho">
         </a>
 
         <a class="me-2" title="Editar Membro" href="{{ url_for('main.edit', id=member['id']) }}">
-          <img src="{{ url_for('static', filename='icons/pencil-square-green.svg') }}" alt="ícone de uma caneta">
+          <img class="action-icon" src="{{ url_for('static', filename='icons/pencil-square-green.svg') }}"
+            alt="ícone de uma caneta">
         </a>
 
         <form class="form-delete" method="post" action="{{ url_for('main.delete', id=member['id']) }}">
           <button style="border: none; background: transparent; padding: 0;" title="Excluir Membro" type="submit">
-            <img src="{{ url_for('static', filename='icons/trash.svg') }}" alt="ícone de uma lixeira">
+            <img class="action-icon" src="{{ url_for('static', filename='icons/trash.svg') }}"
+              alt="ícone de uma lixeira">
           </button>
         </form>
       </td>
