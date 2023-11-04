@@ -1,9 +1,8 @@
 from datetime import datetime
 
-from flask import (Blueprint, flash, g, redirect, render_template, request,
-                   url_for)
+from flask import (Blueprint, abort, flash, g, redirect, render_template,
+                   request, url_for)
 from sqlalchemy import extract
-from werkzeug.exceptions import abort
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.auth import login_required, only_admin
@@ -137,6 +136,9 @@ def edit(id):
         return redirect(url_for('main.index'))
 
     member = Member.query.filter_by(id=id).first()
+
+    if member is None:
+        abort(404)
 
     if request.method == 'POST':
         error = None

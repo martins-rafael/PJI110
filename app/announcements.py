@@ -63,6 +63,9 @@ def announcement(id):
 def edit(id):
     announcement = Announcement.query.filter_by(id=id).first()
 
+    if announcement == None:
+        abort(404)
+
     if request.method == 'POST':
         error = None
 
