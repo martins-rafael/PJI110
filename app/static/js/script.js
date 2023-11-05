@@ -187,3 +187,71 @@ accessibilityOptions.forEach(option => {
     }
   });
 })
+
+function createMap(latitude, longitude) {
+  const map = L.map('mapId', { zoomControl: true })
+    .setView([parseFloat(latitude), parseFloat(longitude)], 17);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  let marker = L.marker([parseFloat(latitude), parseFloat(longitude)])
+    .addTo(map)
+    .openPopup();
+
+  return { map, marker };
+}
+
+function mapOnClick(map, marker, latitudeInput, longitudeInput) {
+  map.on('click', function (ev) {
+    map.removeLayer(marker)
+    const latlng = map.mouseEventToLatLng(ev.originalEvent);
+    latitudeInput.value = latlng.lat;
+    longitudeInput.value = latlng.lng;
+    marker = L.marker([latlng.lat, latlng.lng])
+      .addTo(map);
+  });
+}
+
+const announcementMap = document.querySelector('#announcementMap');
+const switchMap = document.querySelector('#switchMap');
+
+if (announcementMap) {
+  const latitude = announcementMap.dataset.latitude;
+  const longitude = announcementMap.dataset.longitude;
+
+  createMap(latitude, longitude);
+}
+
+if (switchMap) {
+  const mapContainer = document.getElementById('mapIdContainer');
+  let latitudeInput = document.getElementById('latitude');
+  let longitudeInput = document.getElementById('longitude');
+
+  if (latitudeInput.value && longitudeInput.value) {
+    let { map, marker } = createMap(latitudeInput.value, longitudeInput.value);
+
+    mapOnClick(map, marker, latitudeInput, longitudeInput);
+  }
+
+  switchMap.addEventListener('change', event => {
+    if (event.target.checked) {
+      mapContainer.classList.add('show');
+      const initialLatitudeValue = -22.200908768260714;
+      const initialLongitudeValue = -46.757892966270454;
+
+      let { map, marker } = createMap(initialLatitudeValue, initialLongitudeValue);
+
+      latitudeInput.value = initialLatitudeValue;
+      longitudeInput.value = initialLongitudeValue;
+
+      mapOnClick(map, marker, latitudeInput, longitudeInput);
+    } else {
+      mapContainer.classList.remove('show');
+      latitudeInput.value = '';
+      longitudeInput.value = '';
+    }
+  });
+}

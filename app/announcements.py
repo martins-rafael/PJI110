@@ -25,6 +25,8 @@ def create():
 
         title = request.form['title']
         description = request.form['description']
+        latitude = request.form['latitude']
+        longitude = request.form['longitude']
 
         if not title:
             error = 'O título é obrigatório.'
@@ -35,7 +37,7 @@ def create():
             flash(error)
         else:
             new_announcement = Announcement(
-                title=title, description=description, author_id=g.member.id)
+                title=title, description=description, author_id=g.member.id, latitude=latitude, longitude=longitude)
             db.session.add(new_announcement)
             db.session.commit()
 
@@ -48,7 +50,7 @@ def create():
 @login_required
 def announcement(id):
 
-    announcement = db.session.query(Announcement.id, Announcement.title, Announcement.description, Announcement.created_at, Member.name.label('member_name')).filter_by(id=id).join(
+    announcement = db.session.query(Announcement.id, Announcement.title, Announcement.description, Announcement.created_at, Announcement.latitude, Announcement.longitude, Member.name.label('member_name')).filter_by(id=id).join(
         Member, Member.id == Announcement.author_id, isouter=True).first()
 
     if announcement is None:
@@ -71,6 +73,8 @@ def edit(id):
 
         title = request.form['title']
         description = request.form['description']
+        latitude = request.form['latitude']
+        longitude = request.form['longitude']
 
         if not title:
             error = 'O título é obrigatório.'
@@ -82,6 +86,8 @@ def edit(id):
         else:
             announcement.title = title
             announcement.description = description
+            announcement.latitude = latitude
+            announcement.longitude = longitude
 
             db.session.commit()
 

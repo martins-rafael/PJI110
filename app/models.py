@@ -39,6 +39,8 @@ class Announcement(db.Model):
     description = db.Column(db.String)
     author_id = db.Column(db.ForeignKey('member.id'))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    latitude = db.Column(db.String)
+    longitude = db.Column(db.String)
 
 
 def init_defaults():

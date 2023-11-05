@@ -35,6 +35,19 @@ Comunicado
           {{ announcement['description'] }}
         </td>
       </tr>
+
+      {% if announcement['latitude'] and announcement['longitude'] %}
+      <tr>
+        <td>
+          <span class="fw-bold">Localização</span>
+          <br>
+          <div id="announcementMap" data-latitude="{{announcement['latitude']}}"
+            data-longitude="{{announcement['longitude']}}" class="d-flex justify-content-center mt-4">
+            <div id="mapId"></div>
+          </div>
+        </td>
+      </tr>
+      {% endif %}
     </tbody>
   </table>
 
