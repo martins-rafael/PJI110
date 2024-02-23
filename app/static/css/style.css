@@ -97,7 +97,12 @@ body.large-text .action-icon {
   --bs-card-bg: var(--card-bg);
 }
 
-.dropdown-menu {
+footer .btn.dropdown-toggle {
+  border-radius: 0;
+  border-top-left-radius: 6px;
+}
+
+footer .dropdown-menu {
   --bs-dropdown-link-hover-color: #000000;
 }
 
