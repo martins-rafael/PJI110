@@ -82,6 +82,10 @@ body.large-text .action-icon {
   max-width: 100%;
 }
 
+.custom-card--small {
+  min-height: 120px;
+}
+
 .custom-card--link {
   display: block;
   text-decoration: none;
