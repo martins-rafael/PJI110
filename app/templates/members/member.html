@@ -85,12 +85,12 @@
   </table>
 
   <div class="d-flex justify-content-end my-4">
-    <a class="btn btn-primary fw-bold me-3" href="{{ url_for('main.edit', id=member['id']) }}">Editar</a>
+    <a class="btn btn-primary fw-bold me-3" href="{{ url_for('members.edit', id=member['id']) }}">Editar</a>
 
-    <a class="btn btn-warning fw-bold me-3" href="{{ url_for('main.password', id=member['id']) }}">Alterar Senha</a>
+    <a class="btn btn-warning fw-bold me-3" href="{{ url_for('members.password', id=member['id']) }}">Alterar Senha</a>
 
     {% if g.member['is_admin'] %}
-    <form class="form-delete" method="post" action="{{ url_for('main.delete', id=member['id']) }}">
+    <form class="form-delete" method="post" action="{{ url_for('members.delete', id=member['id']) }}">
       <button class="btn btn-danger fw-bold" type="submit">Excluir</button>
     </form>
     {% endif %}

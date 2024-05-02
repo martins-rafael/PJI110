@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container container-fluid d-flex flex-column justify-content-between mt-5">
+  <h1 class="h1 high-contrast-accent">
+    {% block title %}
+    {% if g.member['id'] == member['id'] %} Atualizar Meus Dados {% else %} Atualizar Membro {% endif %}
+    {% endblock %}
+  </h1>
+
+  {% include "partials/member_fields.html" %}
+</div>
+{% endblock %}

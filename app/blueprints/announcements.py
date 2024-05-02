@@ -1,7 +1,7 @@
 from flask import (Blueprint, abort, flash, g, redirect, render_template,
                    request, url_for)
 
-from app.auth import login_required, only_admin
+from app.blueprints.auth import login_required, only_admin
 from app.models import Announcement, Member, db
 
 bp = Blueprint('announcements', __name__, url_prefix='/announcements')

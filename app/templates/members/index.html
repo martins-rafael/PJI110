@@ -8,7 +8,10 @@
     {% endblock %}
   </h1>
 
-  <a class="btn btn-primary fw-bold" href="{{ url_for('main.create') }}">Novo</a>
+  <div>
+    <a class="btn btn-secondary fw-bold" href="{{ url_for('members.members_data') }}">Ver Dados</a>
+    <a class="btn btn-primary fw-bold" href="{{ url_for('members.create') }}">Novo</a>
+  </div>
 </div>
 
 <table class="table container container-fluid mt-4">
@@ -33,16 +36,16 @@
       </td>
 
       <td class="d-flex justify-content-end">
-        <a class="me-2" title="Ver membro" href="{{ url_for('main.member', id=member['id']) }}">
+        <a class="me-2" title="Ver membro" href="{{ url_for('members.member', id=member['id']) }}">
           <img class="action-icon" src="{{ url_for('static', filename='icons/eye.svg') }}" alt="ícone de um olho">
         </a>
 
-        <a class="me-2" title="Editar Membro" href="{{ url_for('main.edit', id=member['id']) }}">
+        <a class="me-2" title="Editar Membro" href="{{ url_for('members.edit', id=member['id']) }}">
           <img class="action-icon" src="{{ url_for('static', filename='icons/pencil-square-green.svg') }}"
             alt="ícone de uma caneta">
         </a>
 
-        <form class="form-delete" method="post" action="{{ url_for('main.delete', id=member['id']) }}">
+        <form class="form-delete" method="post" action="{{ url_for('members.delete', id=member['id']) }}">
           <button style="border: none; background: transparent; padding: 0;" title="Excluir Membro" type="submit">
             <img class="action-icon" src="{{ url_for('static', filename='icons/trash.svg') }}"
               alt="ícone de uma lixeira">

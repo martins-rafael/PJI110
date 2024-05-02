@@ -39,7 +39,7 @@ Dashboard
     </div>
 
     <div class="col">
-      <a class="custom-card--small custom-card--link" href="{{ url_for('main.create') }}">
+      <a class="custom-card--small custom-card--link" href="{{ url_for('members.create') }}">
         <div class="d-flex flex-column align-items-center justify-content-between">
           <img src="{{ url_for('static', filename='icons/plus-circle.svg') }}" alt="ícone de adicionar">
           <div class="fw-bold">ADICIONAR NOVO MEMBRO</div>
@@ -48,7 +48,7 @@ Dashboard
     </div>
 
     <div class="col">
-      <a class="custom-card--small custom-card--link" href="{{ url_for('main.members') }}">
+      <a class="custom-card--small custom-card--link" href="{{ url_for('members.members') }}">
         <div class="d-flex flex-column align-items-center justify-content-between">
           <img src="{{ url_for('static', filename='icons/folder.svg') }}" alt="ícone de adicionar">
           <div class="fw-bold">VER TODOS OS MEMBROS</div>
@@ -75,7 +75,7 @@ Dashboard
 
     <div class="col">
       <a class="custom-card--small custom-card--link {{ 'me-3' if not g.member['is_admin'] }}"
-        href="{{ url_for('main.member', id=g.member['id']) }}">
+        href="{{ url_for('members.member', id=g.member['id']) }}">
         <div class="d-flex flex-column align-items-center justify-content-between">
           <img src="{{ url_for('static', filename='icons/eye-big.svg') }}" alt="ícone de um olho">
           <div class="fw-bold">VER MEUS DADOS</div>
@@ -85,7 +85,7 @@ Dashboard
 
     <div class="col">
       <a class="custom-card--small custom-card--link {{ 'me-3' if not g.member['is_admin'] }}"
-        href="{{ url_for('main.edit', id=g.member['id']) }}">
+        href="{{ url_for('members.edit', id=g.member['id']) }}">
         <div class="d-flex flex-column align-items-center justify-content-between">
           <img src="{{ url_for('static', filename='icons/pencil-square.svg') }}" alt="ícone de lápis">
           <div class="fw-bold">EDITAR MEUS DADOS</div>
@@ -94,7 +94,7 @@ Dashboard
     </div>
 
     <div class="col">
-      <a class="custom-card--small custom-card--link" href="{{ url_for('main.password', id=g.member['id']) }}">
+      <a class="custom-card--small custom-card--link" href="{{ url_for('members.password', id=g.member['id']) }}">
         <div class="d-flex flex-column align-items-center justify-content-between">
           <img src="{{ url_for('static', filename='icons/key.svg') }}" alt="ícone de chave">
           <div class="fw-bold">ALTERAR MINHA SENHA</div>

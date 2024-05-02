@@ -20,8 +20,8 @@
 
         {% if g.member['is_admin'] %}
         <li class="nav-item">
-          <a class="nav-link {{ 'active fw-bold' if request.path == url_for('main.members') }}"
-            href="{{ url_for('main.members') }}">
+          <a class="nav-link {{ 'active fw-bold' if request.path == url_for('members.members') }}"
+            href="{{ url_for('members.members') }}">
             Membros
           </a>
         </li>

@@ -6,6 +6,8 @@ from flask_migrate import Migrate
 
 from app.models import db, init_defaults
 
+from .blueprints import announcements, auth, main, members
+
 load_dotenv()
 
 
@@ -21,21 +23,16 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(test_config)
 
-    from . import models
-    models.db.init_app(app)
-    migrate = Migrate(app, models.db)
+    db.init_app(app)
+    migrate = Migrate(app, db)
 
-    from . import auth
     app.register_blueprint(auth.bp)
-
-    from . import main
     app.register_blueprint(main.bp)
     app.add_url_rule('/', endpoint='index')
-
-    from . import announcements
+    app.register_blueprint(members.bp)
     app.register_blueprint(announcements.bp)
 
-    dev_mode = os.getenv('DEBUG')
+    dev_mode = bool(os.getenv('DEBUG'))
 
     if dev_mode:
         @app.before_first_request
